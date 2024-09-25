@@ -1,0 +1,80 @@
+.timeLine__controller {
+   display: flex;
+ }
+ .timeLine__controller-point {
+   cursor: pointer;
+   width: 6px;
+   height: 6px;
+   display: block;
+   background-color: #ADB5C6;
+   border: 1px solid #ADB5C6;
+   border-radius: 50%;
+   margin-right: 20px;
+ }
+  .timeLine__controller .active {
+   background-color: #42567A;
+   border: 1px solid #42567A;
+ }
+ .container-mobile {
+   padding: 20px;
+   text-align: left;
+ }
+ .years__mobile {
+   text-align: center;
+ }
+ .years__mobile-first {
+   color: #5d5fef;
+   font-size: 2em;
+ }
+ .years__mobile-second {
+   color: #ef5da8;
+   font-size: 2em;
+ }
+ .theme-mobile__title {
+  color: #42567A;
+ }
+ .theme-mobile__line {
+ color: #C7CDD9;
+ }
+ .circleGroup {
+   cursor: pointer;
+ }
+ .circleBlock {
+   position: relative;
+ }
+ .mobile-title {
+   color: #42567A;
+ }
+ .timeLine-mobile {
+   display: flex;
+   position: relative;
+   margin-top: 60px;
+   justify-content: space-between;
+ }
+ .timeLine__title {
+   color: #42567a;
+ }
+ .timeLineNavigationContainer {
+   text-align: left;
+ }
+ .timeLine__navigation {
+   margin-top: 10px;
+ }
+ .timeLine__navigation-btn {
+   cursor: pointer;
+   width: 50px;
+   height: 50px;
+   border: 1px solid #eeeeee;
+   border-radius: 50%;
+   background-color: white;
+   margin-right: 20px;
+ }
+ .timeLine__navigation-btn .active {
+   border: 1px solid #42567a;
+ }
+ .timeLine__controller {
+   position: absolute;
+   left: 50%;
+   top: 50%;
+   transform: translate(-50%, 50%);
+ }
