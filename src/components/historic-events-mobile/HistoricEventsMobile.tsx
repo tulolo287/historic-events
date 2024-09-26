@@ -6,7 +6,8 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import data from "../../data";
-import { EventsSwiper } from "../EventsSwiper";
+import { EventsSwiper } from "../events-swiper/EventsSwiper";
+import { Button } from "../ui/button/Button";
 import "./styles.scss";
 
 gsap.registerPlugin(MotionPathPlugin);
@@ -49,9 +50,9 @@ export const HistoricEventsMobile = () => {
         <br />
         даты
       </h1>
-      <div className="years__mobile">
-        <span className="years__mobile-first">{events.events[0].year}</span>
-        <span className="years__mobile-second">
+      <div className="years-mobile">
+        <span className="heading pink">{events.events[0].year}</span>
+        <span className="heading blue">
           {events.events[events.events.length - 1].year}
         </span>
       </div>
@@ -67,18 +68,8 @@ export const HistoricEventsMobile = () => {
             0{currentTimeLine + 1}/0{data.length}
           </span>
           <div className="timeLine__navigation">
-            <button
-              className="timeLine__navigation-btn"
-              onClick={() => handleChangeTimeLine(false)}
-            >
-              {"<"}
-            </button>
-            <button
-              className="timeLine__navigation-btn"
-              onClick={() => handleChangeTimeLine(true)}
-            >
-              {">"}
-            </button>
+            <Button onClick={() => handleChangeTimeLine(false)}>{"<"}</Button>
+            <Button onClick={() => handleChangeTimeLine(true)}>{">"}</Button>
           </div>
         </div>
         <div className="timeLine__controller">

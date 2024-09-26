@@ -46,8 +46,8 @@ export const EventsSwiper = ({
             <>
               <SwiperSlide>
                 <div className="swiper">
-                  <h3 className="swiper__year">{event.year}</h3>
-                  <p className="swiper__text">{event.text}</p>
+                  <h3 className="font-year">{event.year}</h3>
+                  <p className="l">{event.text}</p>
                 </div>
               </SwiperSlide>
             </>
