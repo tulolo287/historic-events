@@ -8,81 +8,18 @@
   padding-left: 60px;
 }
 
-.circle {
-  width: 30px;
-  height: 30px;
-  border: 1px solid #ccc;
-  border-radius: 50%;
-  fill: $color-primary;
-  transition: transform 0.5s ease-in-out;
-}
-
-.circleGroup:hover > {
-  circle {
-    transform: scale(5);
-    fill: white;
-    stroke: #303e58;
-    stroke-width: 0.1;
-  }
-
-  .textNumber {
-    opacity: 1;
-    visibility: visible;
-    display: block;
-    font-size: medium;
-    transition: transform 1s ease-in-out;
-  }
-}
-
-.circleActive .circle {
-  transform: scale(5);
-  fill: white;
-  stroke: #303e58;
-  stroke-width: 0.1;
-}
-
-.textNumber {
-  opacity: 0;
-  display: none;
-  font-size: 0;
-  visibility: hidden;
-  transition: transform 1s ease-in-out;
-}
-
-.textTitle {
-  font-size: 0;
-  visibility: hidden;
-}
-
-.circleActive {
-  .textTitle {
-    transition-delay: 1s;
-    visibility: visible;
-    display: block;
-    transform: translateX(80px);
-    font-size: medium;
-  }
-
-  .textNumber {
-    opacity: 1;
-    visibility: visible;
-    display: block;
-    font-size: small;
-    transition: transform 1s ease-in-out;
-  }
-}
-
-.circleGroup {
-  cursor: pointer;
-  position: relative;
-}
-
 .circleBlock {
   position: relative;
 }
 
 .svgLineLeft > img {
   position: absolute;
+}
+
+.svgLineRight {
+  position: absolute;
+  top: -300px;
+  left: 705px;
 }
 
 .circleBlock__header {
@@ -97,26 +34,7 @@
   margin-left: 20px;
 }
 
-.circleBlock__years {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.circleBlock__years-first {
-  color: $color-blue;
-  font-size: 160px;
-  margin-right: 30px;
-}
-
-.circleBlock__years-second {
-  color: $color-pink;
-  font-size: 160px;
-}
-
-.circleBlock__circle svg {
-  display: block;
+.circleBlock__circle {
   margin: 0 auto;
 }
 
@@ -129,7 +47,84 @@
   color: $color-primary;
 }
 
-/* #master {
-  display: relative;
-} */
+.text-container {
+  position: absolute;
+  top: 0;
+}
+
+#bigCircle {
+  width: 529px;
+  height: 529px;
+  border: 1px solid #D0D5E0;
+  border-radius: 50%;
+  position: relative;
+  margin: 0 auto;
+}
+
+.textNumber {
+  opacity: 0;
+  font-size: 1px;
+  transition: all .5s ease;
+}
+
+.textTitle {
+  font-size: 0;
+  visibility: hidden;
+
+}
+.circle {
+  width: 7px;
+  height: 7px;
+  background-color: #42567A;
+  border-radius: 50%;
+  transition: all .5s ease-in-out;
+  display: block;
+  cursor: pointer;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-transition: all .5s;
+  -moz-transition: all .5s;
+  transform-origin: center;
+    &:hover {
+      width: 56px;
+      height: 56px;
+      border: 1px solid #42567A;
+      background-color: white;
+
+    }
+    &:hover .textNumber {
+      opacity: 1;
+      font-size: 20px;
+    }
+}
+
+.circleActive .circle {
+  width: 56px;
+  height: 56px;
+  border: 1px solid #42567A;
+  background-color: white;
+}
+
+.circleActive {
+  .textTitle {
+    visibility: visible;
+    font-size: 20px;
+    position: absolute;
+    left: 70px;
+
+  }
+
+  .textNumber {
+    opacity: 1;
+    font-size: 20px;
+  }
+}
+
+.circleGroup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 

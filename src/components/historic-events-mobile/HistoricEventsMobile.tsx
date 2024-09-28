@@ -68,13 +68,13 @@ export const HistoricEventsMobile = () => {
             0{currentTimeLine + 1}/0{data.length}
           </span>
           <div className="timeLine__navigation">
-            <Button onClick={() => handleChangeTimeLine(false)}>{"<"}</Button>
-            <Button onClick={() => handleChangeTimeLine(true)}>{">"}</Button>
+            <Button timeLineLength={data.length} timeLine={currentTimeLine} onClick={() => handleChangeTimeLine(false)} />
+            <Button timeLineLength={data.length} timeLine={currentTimeLine} right={true} onClick={() => handleChangeTimeLine(true)} />
           </div>
         </div>
         <div className="timeLine__controller">
           {data.map((item, idx) => (
-            <span
+            <span key={idx}
               className={`timeLine__controller-point${
                 currentTimeLine === idx ? " active" : ""
               }`}

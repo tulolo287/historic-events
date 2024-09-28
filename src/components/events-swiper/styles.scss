@@ -18,35 +18,3 @@
   color: $color-primary;
 }
 
-.swiper-button {
-  display: flex;
-  position: absolute;
-  top: calc(50% - 12px);
-  z-index: 10;
-  cursor: pointer;
-
-  svg {
-    width: 1.5rem;
-    height: 1.5rem;
-  }
-}
-
-.image-swiper-button-prev {
-  left: -45px;
-  transform: translate(0, -50%);
-}
-
-.image-swiper-button-next {
-  right: -45px;
-  transform: translate(0, -50%);
-}
-
-.swiper-button-disabled {
-  opacity: 0;
-  pointer-events: none;
-}
-
-.timeLine__btn:hover {
-  color: #3877ee;
-  background-color: aqua;
-}

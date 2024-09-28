@@ -1,25 +1,29 @@
 import { useEffect, useState } from "react";
 
-export const useMobile = () => {
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-  var listener = false;
-  useEffect(() => {
+export const useMobile = (breakpoint = 768) => {
+  const checkForDevice = () => window.innerWidth < breakpoint;
 
-  })
+  const [isMobile, setIsMobile] = useState(checkForDevice());
+
   useEffect(() => {
-    const handleResize = () => {
-      console.log("add lister");
-      setIsMobile(window.innerWidth < 768);
+    const handlePageResized = () => {
+      setIsMobile(checkForDevice());
     };
-    if (!listener) {
-      window.addEventListener("resize", handleResize);
-      listener = true;
+
+    if (typeof window !== "undefined") {
+      window.addEventListener("resize", handlePageResized);
+      window.addEventListener("orientationchange", handlePageResized);
+      window.addEventListener("load", handlePageResized);
+      window.addEventListener("reload", handlePageResized);
     }
 
-    return function () {
-      window.removeEventListener("resize", handleResize);
-      listener = false;
-      console.log("remove lister");
+    return () => {
+      if (typeof window !== "undefined") {
+        window.removeEventListener("resize", handlePageResized);
+        window.removeEventListener("orientationchange", handlePageResized);
+        window.removeEventListener("load", handlePageResized);
+        window.removeEventListener("reload", handlePageResized);
+      }
     };
   }, []);
   return { isMobile };
