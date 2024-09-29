@@ -1,41 +1,32 @@
-@import '../../styles/variables.scss';
+@import 'styles/variables.scss';
 
  .wrapper {
   margin: 0 auto;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  padding-right: 60px;
-  padding-left: 60px;
+  max-width: 1368px;
 }
 
-.circleBlock {
-  position: relative;
-}
-
-.svgLineLeft > img {
-  position: absolute;
-}
-
-.svgLineRight {
-  position: absolute;
-  top: -300px;
-  left: 705px;
-}
-
-.circleBlock__header {
+.circleBlock__container {
+  gap: 40px;
   display: flex;
-  position: absolute;
+  flex-direction: column;
+  margin: 60px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
-.circleBlock__header-text {
-  font-size: 2em;
-  color: #5d5fef;
-  margin: -10px;
-  margin-left: 20px;
-}
-
-.circleBlock__circle {
-  margin: 0 auto;
+.svgLineLeft {
+  position: relative;
+  top: 15px;
+   .headerLine {
+    position: absolute;
+  }
+  .lineLeft {
+    content: "";
+    height: calc(100vh - 40px);
+    width: 1px;
+    background-color: $color-light-grey;
+    position: absolute;
+  }
 }
 
 .timeLine {
@@ -50,81 +41,5 @@
 .text-container {
   position: absolute;
   top: 0;
-}
-
-#bigCircle {
-  width: 529px;
-  height: 529px;
-  border: 1px solid #D0D5E0;
-  border-radius: 50%;
-  position: relative;
-  margin: 0 auto;
-}
-
-.textNumber {
-  opacity: 0;
-  font-size: 1px;
-  transition: all .5s ease;
-}
-
-.textTitle {
-  font-size: 0;
-  visibility: hidden;
-
-}
-.circle {
-  width: 7px;
-  height: 7px;
-  background-color: #42567A;
-  border-radius: 50%;
-  transition: all .5s ease-in-out;
-  display: block;
-  cursor: pointer;
-  display:flex;
-  justify-content: center;
-  align-items: center;
-  -webkit-transition: all .5s;
-  -moz-transition: all .5s;
-  transform-origin: center;
-    &:hover {
-      width: 56px;
-      height: 56px;
-      border: 1px solid #42567A;
-      background-color: white;
-
-    }
-    &:hover .textNumber {
-      opacity: 1;
-      font-size: 20px;
-    }
-}
-
-.circleActive .circle {
-  width: 56px;
-  height: 56px;
-  border: 1px solid #42567A;
-  background-color: white;
-}
-
-.circleActive {
-  .textTitle {
-    visibility: visible;
-    font-size: 20px;
-    position: absolute;
-    left: 70px;
-
-  }
-
-  .textNumber {
-    opacity: 1;
-    font-size: 20px;
-  }
-}
-
-.circleGroup {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
 

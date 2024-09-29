@@ -1,7 +1,7 @@
 import React from "react";
 import { useMobile } from "../../hooks/useMobile";
+import { HistoricEventsMobile } from "components/historic-events-mobile/HistoricEventsMobile";
 import { HistoricEvents } from "../historic-events/HistoricEvents";
-import { HistoricEventsMobile } from "../historic-events-mobile/HistoricEventsMobile";
 
 export const App = () => {
   const { isMobile } = useMobile();

@@ -1,29 +1,54 @@
-import React, { useRef } from 'react'
-import line from "../../assets/line.svg";
-import { useGSAP } from '@gsap/react';
-import gsap from "gsap";
-import './styles.scss';
+import React, { useMemo } from "react";
+import "./styles.scss";
 
-export const AnimatedText = ({timeLine, startYear, endYear}: {timeLine: number, startYear: number, endYear: number}) => {
-   const noRevert = useRef();
+export const AnimatedText = ({
+  startYear,
+  endYear,
+}: {
+  startYear: number | string;
+  endYear: number | string;
+}) => {
+  const firstYears = useMemo(() => {
+    const yearStr = startYear.toString();
+    return {
+      startNumbers: yearStr.substring(-5, 2),
+      lastNumbers: [...yearStr.substring(2)],
+    };
+  }, [startYear]);
 
-   useGSAP(() => {
-     gsap.to('.font-year__big', {
-       scale: 3,
-       rotation: 44,
-     });
-   }, [timeLine]);
+  const lastYears = useMemo(() => {
+    const yearStr = endYear.toString();
+    return {
+      startNumbers: yearStr.substring(-5, 2),
+      lastNumbers: [...yearStr.substring(2)],
+    };
+  }, [endYear]);
 
-   return (
-   <div className="circleBlock__years">
-   <div className="svgLineRight">
-     <img src={line} />
-   </div>
-   <span className="font-year__big blue mr80">{startYear}</span>
-   <span className="font-year__big pink">
-     {endYear}
-   </span>
- </div>
-  )
-}
-
+  return (
+    <div key={startYear} className="circleBlock__years">
+      <div className="years-wrapper">
+        <div>
+          <span className="font-year__big blue">{firstYears.startNumbers}</span>
+        </div>
+        <div className="bounce mr80">
+          {firstYears.lastNumbers.map((item, idx) => (
+            <span key={idx} className="font-year__big blue">
+              {item}
+            </span>
+          ))}
+        </div>
+        <div className="relative">
+          <div className="lineRight" />
+          <span className="font-year__big pink">{lastYears.startNumbers}</span>
+        </div>
+        <div className="bounce">
+          {lastYears.lastNumbers.map((item, idx) => (
+            <span key={idx} className="font-year__big pink">
+              {item}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};

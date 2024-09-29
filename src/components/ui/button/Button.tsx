@@ -12,20 +12,20 @@ export const Button: React.FC<
   className,
   right = false,
   timeLine = 0,
-  timeLineLength,
+  timeLineLength = 2,
   ...props
-}: any) => {
+}) => {
   let disabled = false;
   const totalClass = useMemo(() => {
     let totalClass = "button ";
     if (timeLine < 1 && !right) {
-      totalClass += `${className} disabled`
-      disabled = true
+      totalClass += `${className} disabled`;
+      disabled = true;
       return totalClass;
     }
     if (timeLine > timeLineLength - 2 && right) {
-      totalClass += `${className}${right ? " right disabled" : ""}`
-      disabled = true
+      totalClass += `${className}${right ? " right disabled" : ""}`;
+      disabled = true;
       return totalClass;
     }
     totalClass += `${className}${right ? " right" : ""}`;

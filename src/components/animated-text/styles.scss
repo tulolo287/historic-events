@@ -1,22 +1,11 @@
-@import '../../styles/variables.scss';
+@import 'styles/variables.scss';
 
-@media (min-width:768px) {
-   .font-year__big {
-      font-size: calc(15px + 15vw);
-   }
+@media (max-width:1000px) {
+  .font-year__big {
+     font-size: 130px !important;
+  }
 }
-/* $small: 700px;
-$medium: 900px;
 
-.font-year__big {
-
-  @media screen and (max-width: $small) {
-   font-size: 12px
-  }
-  @media screen and (min-width: $medium) {
-
-  }
-} */
 .circleBlock__years {
    position: absolute;
    left: 50%;
@@ -32,3 +21,53 @@ $medium: 900px;
  .circleBlock__years-second {
    color: $color-pink;
  }
+
+.svgLineRight {
+  position: absolute;
+  top: -265px;
+  left: 705px;
+  z-index: -10;
+}
+
+.years-wrapper {
+ display: flex;
+}
+
+.bounce {
+  display: inline-flex;
+  justify-content: center;
+}
+
+.bounce span {
+  display: inline-flex;
+  animation: bounce .5s infinite;
+  animation-iteration-count: 1
+}
+
+@keyframes bounce {
+  0%,
+  50%,
+  100% {
+      transform: translateY(0);
+  }
+  25% {
+      transform: translateY(-10px);
+  }
+}
+.bounce span:nth-of-type(1) {
+  animation-delay: 0.1s;
+}
+.bounce span:nth-of-type(2) {
+  animation-delay: 0.2s;
+}
+
+.lineRight {
+  content: "";
+  height: 100vh;
+  width: 1px;
+  background-color: #D0D5E0;
+  position: absolute;
+  top: -265px;
+  left: 75%;
+  z-index: -10;
+}

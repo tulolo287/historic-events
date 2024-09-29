@@ -1,42 +1,34 @@
-import gsap from "gsap";
-import { MotionPathPlugin } from "gsap/MotionPathPlugin";
 import React, { useMemo, useState } from "react";
 import headerLine from "../../assets/headerLine.svg";
-import line from "../../assets/line.svg";
 import data from "../../data";
 import { EventsSwiper } from "../events-swiper/EventsSwiper";
 import { TimeLineCircle } from "../time-line-circle/TimeLineCircle";
-import { Button } from "../ui/button/Button";
+import { TimeLineNavigation } from "../time-line-navigation/TimeLineNavigation";
 import "./styles.scss";
-
-gsap.registerPlugin(MotionPathPlugin);
 
 export const HistoricEvents = () => {
   const [currentTimeLine, setCurrentTimeLine] = useState(0);
+  const lastIimeLine = data.length;
 
   const events = useMemo(() => {
-    return data[currentTimeLine].events;
+    return data[currentTimeLine];
   }, [data, currentTimeLine]);
 
-  function handleChangeTimeLine(isNext: boolean) {
-    if (isNext && currentTimeLine < data.length - 1) {
+  function handleChangeTimeLine(isNext: boolean = true) {
+    if (isNext && currentTimeLine < lastIimeLine - 1) {
       setCurrentTimeLine(currentTimeLine + 1);
-    } else if (isNext) {
-      setCurrentTimeLine(0);
     }
     if (!isNext && currentTimeLine > 0) {
       setCurrentTimeLine(currentTimeLine - 1);
-    } else if (!isNext) {
-      setCurrentTimeLine(data.length - 1);
     }
   }
   return (
     <article className="wrapper">
       <div className="svgLineLeft">
-        <img src={line} />
-        <img src={headerLine} />
+        <div className="lineLeft" />
+        <img className="headerLine" src={headerLine} />
       </div>
-      <div className="circleBlock__container ml80">
+      <div className="circleBlock__container">
         <div className="circleBlock__header">
           <h1 className="heading">
             Исторические
@@ -47,27 +39,14 @@ export const HistoricEvents = () => {
         <TimeLineCircle
           setCurrentTimeLine={setCurrentTimeLine}
           data={data}
-          timeLine={currentTimeLine}
+          currentTimeLine={currentTimeLine}
         />
-        <div className="timeLine mb80">
-          <span className="timeLine__title">
-            0{currentTimeLine + 1}/0{data.length}
-          </span>
-          <div className="timeLine__btnWrapper">
-            <Button
-              timeLineLength={data.length}
-              timeLine={currentTimeLine}
-              onClick={() => handleChangeTimeLine(false)}
-            />
-            <Button
-              timeLineLength={data.length}
-              timeLine={currentTimeLine}
-              right={true}
-              onClick={() => handleChangeTimeLine(true)}
-            />
-          </div>
-        </div>
-        <EventsSwiper events={events} isNavigation={true} />
+        <TimeLineNavigation
+          currentTimeLine={currentTimeLine}
+          lastTimeLine={lastIimeLine}
+          handleChangeTimeLine={handleChangeTimeLine}
+        />
+        <EventsSwiper events={events.events} isNavigation={true} />
       </div>
     </article>
   );

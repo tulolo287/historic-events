@@ -1,0 +1,98 @@
+@import 'styles/variables.scss';
+
+.circleBlock {
+   margin-top: 60px;
+   position: relative;
+ }
+
+ .circleBlock__header {
+   display: flex;
+   position: absolute;
+ }
+
+ .circleBlock__header-text {
+   font-size: 2em;
+   color: #5d5fef;
+   margin: -10px;
+   margin-left: 20px;
+ }
+
+ .circleBlock__circle {
+   margin: 0 auto;
+ }
+
+ .bigCircle {
+   width: 529px;
+   height: 529px;
+   border: 1px solid #D0D5E0;
+   border-radius: 50%;
+   position: relative;
+   margin: 0 auto;
+ }
+
+ .textNumber {
+   opacity: 0;
+   font-size: 1px;
+   transition: all .5s ease;
+ }
+
+ .textTitle {
+   font-size: 0;
+   visibility: hidden;
+ }
+
+ .circle {
+   width: 6px;
+   height: 6px;
+   background-color: $color-primary;
+   border-radius: 50%;
+   transition: all .5s ease-in-out;
+   display: block;
+   cursor: pointer;
+   display:flex;
+   justify-content: center;
+   align-items: center;
+   -webkit-transition: all .5s;
+   -moz-transition: all .5s;
+   transform-origin: center;
+     &:hover {
+       width: 56px;
+       height: 56px;
+       border: 1px solid $color-primary;
+       background-color: white;
+     }
+     &:hover .textNumber {
+       opacity: 1;
+       font-size: 20px;
+     }
+ }
+
+ .circleActive .circle {
+   width: 56px;
+   height: 56px;
+   border: 1px solid $color-primary;
+   background-color: white;
+ }
+
+ .circleActive {
+   .textTitle {
+     visibility: visible;
+     font-size: 20px;
+     position: absolute;
+     left: 70px;
+   }
+
+   .textNumber {
+     opacity: 1;
+     font-size: 20px;
+   }
+ }
+
+ .circleGroup {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+ }
+
+

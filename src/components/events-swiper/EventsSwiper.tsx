@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import "swiper/css";
 import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -30,7 +30,7 @@ export const EventsSwiper = ({
         {isNav && (
           <>
             <div className="image-swiper-button-prev">
-              <Button className="swiper-button" timeLine={1}/>
+              <Button className="swiper-button" timeLine={1} />
             </div>
             <div className="image-swiper-button-next">
               <Button className="swiper-button" right={true} />
@@ -43,15 +43,13 @@ export const EventsSwiper = ({
           slidesPerView={sliders}
           navigation={isNav}
         >
-          {events.map((event, idx) => (
-            <Fragment key={idx}>
-              <SwiperSlide>
-                <div className="swiper">
-                  <h3 className="font-year">{event.year}</h3>
-                  <p className="l">{event.text}</p>
-                </div>
-              </SwiperSlide>
-            </Fragment>
+          {events?.map((event, idx) => (
+            <SwiperSlide key={idx}>
+              <div className="swiper">
+                <h3 className="font-year">{event.year}</h3>
+                <p className="l">{event.text}</p>
+              </div>
+            </SwiperSlide>
           ))}
         </Swiper>
       </div>

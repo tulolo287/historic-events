@@ -1,22 +1,26 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import React, { useEffect, useRef } from "react";
+import React, { useLayoutEffect, useRef, useState } from "react";
 import { Events } from "../../types";
 import { degreesToRadians } from "../../utils";
 import { AnimatedText } from "../animated-text/AnimatedText";
+import "./styles.scss";
+
+let rotatedDegree = 0;
 
 export const TimeLineCircle = ({
   setCurrentTimeLine,
-  timeLine,
+  currentTimeLine,
   data,
 }: {
-  setCurrentTimeLine: any;
-  timeLine: number;
+  setCurrentTimeLine: (idx: number) => void;
+  currentTimeLine: number;
   data: Events[];
 }) => {
-  const container = useRef<any>();
-  const tl = useRef<any>();
+  const container = useRef<HTMLDivElement | null>(null);
+  const bigCircle = useRef<HTMLDivElement | null>(null);
   const { contextSafe } = useGSAP({ scope: container });
+  const [tl, setTl] = useState<gsap.core.Timeline>(null);
 
   let degree = 360 / data.length;
   let rad = 0;
@@ -24,54 +28,54 @@ export const TimeLineCircle = ({
   let y = 0;
   const topPos = 310;
   let degreeModule = 0;
-  let rotatedDegree = 0;
 
-  useEffect(() => {
-    rotateCircle(timeLine);
-  }, [timeLine]);
+  const startYear = data[currentTimeLine]?.events[0]?.year || "No start year";
+  const endYear =
+    data[currentTimeLine]?.events[data[currentTimeLine]?.events.length - 1]
+      ?.year || "No end year";
 
-  function rotateCircle(idx: number) {
+  useLayoutEffect(() => {
+    rotateCircle(currentTimeLine);
+  }, [data, currentTimeLine]);
+
+  const rotateCircle = contextSafe((idx: number) => {
     degreeModule = rotatedDegree % 360;
     let degreesToUp = topPos - (degreeModule + degree * idx - 50);
     rotatedDegree += degreesToUp;
+    const q = gsap.utils.selector(bigCircle.current);
 
-    gsap.to("#bigCircle", {
+    gsap.to(bigCircle.current, {
       duration: 1,
       rotation: rotatedDegree,
       transformOrigin: "center",
-      ease: "none",
     });
-    gsap.to("#bigCircle > div", {
+    gsap.to(q(".circleGroup"), {
       duration: 1,
       rotation: -rotatedDegree,
       transformOrigin: "center",
-      ease: "none",
     });
-    gsap.to(".textTitle", {
+    gsap.to(q(".textTitle"), {
       visibility: "hidden",
     });
-    gsap.to(".circleActive .textTitle", {
+    gsap.to(q(".circleActive .textTitle"), {
       delay: 1,
       visibility: "visible",
     });
-  }
+  });
 
   useGSAP(
     () => {
+      const tl = gsap.timeline();
+      setTl(tl);
       const circleGroups = gsap.utils.toArray<HTMLElement>(".circleGroup");
 
       circleGroups.forEach((item, idx) => {
         rad = degreesToRadians(degree * idx - 50);
         x = Math.cos(rad) * 264.5;
         y = Math.sin(rad) * 264.5;
-
         gsap.set(item, {
           x,
           y,
-        });
-
-        item.addEventListener("click", () => {
-          setCurrentTimeLine(idx);
         });
       });
     },
@@ -81,14 +85,17 @@ export const TimeLineCircle = ({
   return (
     <div className="circleBlock" ref={container}>
       <AnimatedText
-        timeLine={timeLine}
-        startYear={data[timeLine].events[0].year}
-        endYear={data[timeLine].events[data[timeLine].events.length - 1].year}
+        startYear={startYear}
+        endYear={endYear}
       />
-      <div id="bigCircle">
-        {data.map((item, idx) => (
-          <div key={idx}
-            className={`circleGroup${timeLine === idx ? " circleActive" : ""}`}
+      <div ref={bigCircle} className="bigCircle">
+        {data?.map((item, idx) => (
+          <div
+            key={idx}
+            onClick={() => setCurrentTimeLine(idx)}
+            className={`circleGroup${
+              currentTimeLine === idx ? " circleActive" : ""
+            }`}
           >
             <div className="circle">
               <span className="textNumber">{idx + 1}</span>
